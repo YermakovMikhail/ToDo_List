@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography"
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
 import Grid from "@material-ui/core"
+import TodoList from "./TodoList"
 function TodoApp(){
     const initialTodos = [
         {id: 1, task: "Wake up", complited: false},
