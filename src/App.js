@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TodoApp from "./TofoApp"
+import TodoApp from "./TodoApp"
 import "./App.css"
 
 
