@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
 import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 import AppBar from "@material-ui/core/AppBar"
@@ -7,41 +7,48 @@ import Grid from "@material-ui/core/Grid"
 import TodoList from "./TodoList"
 import TodoForm from "./TodoForm"
 import { v4 as uuid } from 'uuid';
-function TodoApp(){
+function TodoApp() {
     const initialTodos = [
-        {id: 1, task: "Wake up", completed: false},
-        {id: 2, task: "Have breakfast", completed: true},
-        {id: 3, task: "Take a shower", completed: false}
+        { id: 1, task: "Wake up", completed: false },
+        { id: 2, task: "Have breakfast", completed: true },
+        { id: 3, task: "Take a shower", completed: false }
     ]
     const [todos, setTodos] = useState(initialTodos);
     const addTodo = newTodoText => {
-        setTodos([...todos,{id: uuid(), task: newTodoText, completed: false}]);
+        setTodos([...todos, { id: uuid(), task: newTodoText, completed: false }]);
     };
     const removeTodo = todoId => {
         const updatedTodos = todos.filter(todo => todo.id !== todoId);
         setTodos(updatedTodos);
     }
-    const toggleTodo = todoId =>{
-        const updatedTodos = todos.map(todo => todo.id === todoId ? {...todo,completed: !todo.completed} : todo);
+    const toggleTodo = todoId => {
+        const updatedTodos = todos.map(todo => todo.id === todoId ? { ...todo, completed: !todo.completed } : todo);
         setTodos(updatedTodos);
     }
-    return(
+
+    const editTodo = (todoId, newTask) => {
+        const updatedTodos = todos.map(todo =>
+            todo.id === todoId ? { ...todo, task: newTask } : todo);
+        setTodos(updatedTodos);
+    }
+    return (
         <Paper
-            style ={{
-                padding:0,
-                margin:0,
+            style={{
+                padding: 0,
+                margin: 0,
                 height: "100px",
-                backgroundColor:"#fafafa"}}
-            elevation = {0}>
-            <AppBar color='primary' position = 'static' style ={{height:"64px"}}>
+                backgroundColor: "#fafafa"
+            }}
+            elevation={0}>
+            <AppBar color='primary' position='static' style={{ height: "64px" }}>
                 <Toolbar>
                     <Typography color='inherit'> TODOS WITH HOOKS</Typography>
                 </Toolbar>
             </AppBar>
-            <Grid container justify = "center" style={{marginTop: "20px"}}>
+            <Grid container justify="center" style={{ marginTop: "20px" }}>
                 <Grid item xs={11} md={8} lg={4}>
-                    <TodoForm  addTodo = {addTodo}/>
-                    <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo}/>
+                    <TodoForm addTodo={addTodo} />
+                    <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} editTodo={editTodo} />
                 </Grid>
             </Grid>
         </Paper>
